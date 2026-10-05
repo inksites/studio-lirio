@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="pt-BR" data-tema="rose">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Lírio — sobrancelha e maquiagem em Manaíra</title>
+<meta name="description" content="Modelo de demonstração InkSites: site premium com rolagem em filme pra studio de sobrancelha e maquiagem.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: filme de 5 cenas preso na tela (texto à esquerda, quadro vertical à direita, sem cortar nem esticar a mídia);
+   depois, prova social, serviços, equipe, avaliações, galeria e visita. Dois temas: noir (preto e branco com rosa e dourado) e rosé claro. */
+:root{--display:'Cormorant Garamond',Georgia,serif;--body:'Jost',system-ui,sans-serif}
+[data-tema="noir"]{--bg:#0B0B0B;--bg2:#141414;--ink:#F4F1EC;--muted:#9F9A94;--line:rgba(244,241,236,.13);
+  --acento:#E2A4AE;--ouro:#C9A24A;--btn-bg:#F4F1EC;--btn-ink:#0B0B0B;--foto:grayscale(1) contrast(1.06) brightness(.96)}
+[data-tema="rose"]{--bg:#FBF6F3;--bg2:#F3E8E4;--ink:#2A2226;--muted:#7D6E72;--line:rgba(42,34,38,.12);
+  --acento:#B76E79;--ouro:#B8913F;--btn-bg:#2A2226;--btn-ink:#FBF6F3;--foto:none}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 17px/1.65 var(--body);-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
+a{color:inherit}
+img,video{filter:var(--foto);transition:filter .5s}
+
+.demo{position:fixed;inset:0 0 auto;z-index:40;display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;align-items:center;background:#000;color:#E9C46A;font:500 12px/1.3 ui-monospace,monospace;padding:7px 12px}
+.demo a{color:#000;background:#E9C46A;padding:3px 8px;border-radius:4px;text-decoration:none}
+.temas{display:inline-flex;gap:4px}
+.demo .curto{display:none}.temas{align-items:center}
+@media (max-width:700px){.demo{flex-wrap:nowrap;gap:8px;font-size:11px}.demo .longo{display:none}.demo .curto{display:inline}.demo{white-space:nowrap}.demo a{white-space:nowrap}.temas button{font-size:11px;padding:3px 6px}}
+.temas button{font:500 12px ui-monospace,monospace;border:1px solid #E9C46A;background:none;color:#E9C46A;padding:3px 8px;border-radius:4px;cursor:pointer}
+.temas button[aria-pressed="true"]{background:#E9C46A;color:#000}
+
+header{position:fixed;top:30px;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(16px,4vw,56px);background:linear-gradient(var(--bg),rgba(0,0,0,0));}
+[data-tema="rose"] header{background:linear-gradient(var(--bg),rgba(251,246,243,0))}
+.marca{font:500 28px/1 var(--display);letter-spacing:.02em}.marca span{color:var(--ouro)}
+nav.menu{display:flex;gap:26px;font:400 13px var(--body);letter-spacing:.14em;text-transform:uppercase}
+nav.menu a{text-decoration:none;color:var(--muted)}nav.menu a:hover{color:var(--ink)}
+.agendar{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font:500 13px var(--body);letter-spacing:.14em;text-transform:uppercase;padding:11px 20px}
+.agendar:hover{background:var(--ink);color:var(--bg)}
+@media (max-width:860px){nav.menu{display:none}.agendar{padding:9px 14px;font-size:12px}.marca{font-size:24px}}
+
+/* ---------- filme ---------- */
+.filme{position:relative;height:560vh}
+.palco{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(24px,4vw,64px);padding:96px clamp(16px,5vw,80px) 40px}
+.textos{position:relative;height:min(520px,62vh)}
+.cena{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(22px);will-change:opacity,transform}
+.cena small{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font:500 12px var(--body);letter-spacing:.26em;text-transform:uppercase;color:var(--ouro);margin-bottom:18px}
+.cena small::before{content:'';width:34px;height:1px;background:var(--ouro)}
+.cena h1,.cena h2{margin:0;font:400 clamp(44px,6.4vw,92px)/.98 var(--display);letter-spacing:-.01em}
+.cena em{font-style:italic;color:var(--acento)}
+.cena p{margin:20px 0 0;color:var(--muted);font-size:clamp(16px,1.4vw,19px);max-width:42ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.chips span{border:1px solid var(--line);padding:6px 12px;font-size:13px;letter-spacing:.04em}
+.acoes{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font:500 13px var(--body);letter-spacing:.16em;text-transform:uppercase;padding:16px 26px}
+.btn-a{background:var(--btn-bg);color:var(--btn-ink)}.btn-b{border:1px solid var(--line)}
+.quadro{position:relative;height:min(78vh,820px);aspect-ratio:3/4;justify-self:center;max-width:100%;overflow:hidden;background:var(--bg2)}
+.quadro::after{content:'';position:absolute;inset:14px;border:1px solid rgba(201,162,74,.45);pointer-events:none;z-index:2}
+.camada{position:absolute;inset:0;opacity:0;will-change:opacity,transform}
+.camada img,.camada video{width:100%;height:100%;object-fit:cover;display:block}
+.trilha{position:absolute;left:clamp(16px,5vw,80px);bottom:34px;display:flex;gap:18px;font:500 11px var(--body);letter-spacing:.18em;text-transform:uppercase}
+.trilha div{display:flex;align-items:center;gap:8px;color:var(--muted);opacity:.5;transition:opacity .3s,color .3s}
+.trilha div b{font-weight:500;color:var(--ouro)}
+.trilha div.ativo{opacity:1;color:var(--ink)}
+@media (max-width:860px){
+  .filme{height:500vh}
+  .palco{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;padding:84px 16px 24px;gap:14px;align-content:start}
+  .quadro{order:-1;height:46vh;aspect-ratio:auto;width:100%}
+  .textos{height:auto;min-height:40vh}
+  .cena h1,.cena h2{font-size:clamp(38px,10vw,52px)}
+  .cena p{margin-top:12px}.chips{display:none}
+  .trilha{display:none}
+}
+
+/* ---------- depois do filme ---------- */
+main{position:relative;z-index:1;background:var(--bg)}
+.sec{max-width:1160px;margin:0 auto;padding:clamp(72px,10vw,128px) clamp(16px,4vw,40px);display:flex;flex-direction:column;gap:32px}
+.rotulo{display:flex;align-items:center;gap:12px;font:500 12px var(--body);letter-spacing:.26em;text-transform:uppercase;color:var(--ouro)}
+.rotulo::before{content:'';width:34px;height:1px;background:var(--ouro)}
+.sec h2{margin:0;font:400 clamp(38px,5.2vw,68px)/1.02 var(--display)}
+.sec h2 em{font-style:italic;color:var(--acento)}
+.prova{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr)}
+.prova div{padding:28px 18px;text-align:center;border-left:1px solid var(--line)}.prova div:first-child{border-left:0}
+.prova b{display:block;font:400 clamp(30px,3.6vw,44px)/1 var(--display)}.prova b i{color:var(--ouro);font-style:normal}
+.prova span{font-size:13px;letter-spacing:.06em;color:var(--muted)}
+.precos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px)}
+.precos h3{margin:0 0 4px;font:400 italic 30px var(--display);color:var(--acento)}
+.item{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.item b{font-weight:400;font-size:18px}.item span{display:block;font-size:14px;color:var(--muted)}
+.item em{font-style:normal;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+.nota{font-size:14px;color:var(--muted)}
+.equipe{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pessoa{display:flex;gap:20px;align-items:center;border:1px solid var(--line);padding:24px}
+.pessoa i{flex:none;width:72px;height:72px;border-radius:50%;border:1px solid var(--ouro);display:flex;align-items:center;justify-content:center;font:italic 400 30px var(--display);color:var(--ouro);font-style:italic}
+.pessoa b{display:block;font:400 26px/1.1 var(--display)}.pessoa span{display:block;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ouro);margin:4px 0 6px}.pessoa p{margin:0;color:var(--muted);font-size:15px}
+.avals{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.aval{border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;gap:14px}
+.aval .est{color:var(--ouro);letter-spacing:.2em}.aval p{margin:0;font:400 italic 22px/1.35 var(--display)}.aval span{font-size:13px;color:var(--muted)}
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.galeria img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.visita{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,4vw,56px);align-items:start}
+.horario{width:100%;border-collapse:collapse;font-size:16px}
+.horario td{padding:14px 0;border-bottom:1px solid var(--line)}.horario td:last-child{text-align:right;color:var(--muted)}
+.mapa{width:100%;aspect-ratio:4/3;border:0;filter:var(--foto)}
+[data-tema="noir"] .mapa{filter:grayscale(1) invert(.9) contrast(.9)}
+
+.faq{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:22px 0;font:400 clamp(22px,2.2vw,28px)/1.2 var(--display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--ouro);font:300 28px/1 var(--body);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 22px;color:var(--muted);max-width:62ch}
+.fim{text-align:center;align-items:center}
+.fim p{color:var(--muted);max-width:46ch;margin:0}
+footer{border-top:1px solid var(--line);padding:30px 16px 44px;text-align:center;font-size:13px;color:var(--muted);letter-spacing:.04em}
+.zapfixo{position:fixed;right:18px;bottom:18px;z-index:35;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.zapfixo svg{width:28px;height:28px;filter:none}
+@media (max-width:860px){.prova{grid-template-columns:1fr 1fr}.prova div:nth-child(3){border-left:0}.precos,.equipe,.avals,.visita{grid-template-columns:1fr}.galeria{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo"><span class="longo">Modelo de demonstração · negócio, fotos e preços ilustrativos</span><span class="curto">Demonstração</span>
+  <a href="https://inksites.github.io/salao/">Quero um site assim</a></div>
+<header>
+  <div class="marca">Studio Lírio<span>.</span></div>
+  <nav class="menu"><a href="#precos">Serviços</a><a href="#equipe">Equipe</a><a href="#duvidas">Dúvidas</a><a href="#visita">Visite</a></nav>
+  <a class="agendar" href="#visita">Agendar</a>
+</header>
+
+<section class="filme" id="filme" aria-label="Como é o atendimento, em cinco cenas">
+  <div class="palco">
+    <div class="textos">
+      <div class="cena"><small>Sobrancelha &amp; maquiagem · Manaíra</small><h1>Sobrancelha no <em>seu</em> formato.</h1><p>Design feito a partir do seu rosto, com hora marcada e sem pressa.</p><div class="acoes"><a class="btn btn-a" href="#visita">Agendar horário</a></div></div>
+      <div class="cena"><small>01 · Mapeamento</small><h2>Primeiro, a gente <em>mede</em>.</h2><p>Linha, régua e o desenho do seu rosto antes de tirar qualquer fio. Nada de molde pronto.</p><div class="chips"><span>Mapeamento facial</span><span>Material descartável</span></div></div>
+      <div class="cena"><small>02 · Design + henna</small><h2>Depois, desenha <em>fio a fio</em>.</h2><p>Henna que preenche as falhas e dura até 15 dias na pele. Brow lamination pra quem quer volume.</p><div class="chips"><span>Henna</span><span>Brow lamination</span><span>Micropigmentação</span></div></div>
+      <div class="cena"><small>03 · Maquiagem</small><h2>Maquiagem que <em>dura a festa</em>.</h2><p>Pele preparada, acabamento leve e nada que pareça máscara. Social, noiva ou aula pra você mesma.</p></div>
+      <div class="cena"><small>04 · Seu horário</small><h2>Um horário. <em>Só seu.</em></h2><p>Ambiente climatizado, Pix ou cartão sem taxa, de terça a sábado.</p><div class="acoes"><a class="btn btn-a" href="#visita">Agendar no WhatsApp</a><a class="btn btn-b" href="#precos">Ver preços</a></div></div>
+    </div>
+    <div class="quadro" aria-hidden="true">
+      <div class="camada"><video id="v" src="midia/cena1.mp4" poster="midia/capa.jpg" muted playsinline preload="auto"></video></div>
+      <div class="camada"><img src="midia/mapeamento.jpg" alt=""></div>
+      <div class="camada"><img src="midia/henna.jpg" alt=""></div>
+      <div class="camada"><img src="midia/maquiagem.jpg" alt=""></div>
+      <div class="camada"><img src="midia/ambiente.jpg" alt="" style="object-position:30% 50%"></div>
+    </div>
+    <div class="trilha" aria-hidden="true"><div><b>00</b>Início</div><div><b>01</b>Mapeamento</div><div><b>02</b>Design</div><div><b>03</b>Maquiagem</div><div><b>04</b>Horário</div></div>
+  </div>
+</section>
+
+<main>
+  <section class="sec" style="padding-top:24px;padding-bottom:24px">
+    <div class="prova">
+      <div><b>4,9 <i>★</i></b><span>nota no Google</span></div>
+      <div><b>12</b><span>avaliações</span></div>
+      <div><b>Ter–Sáb</b><span>das 9h às 19h</span></div>
+      <div><b>Pix e cartão</b><span>sem taxa extra</span></div>
+    </div>
+  </section>
+
+  <section class="sec" id="precos">
+    <span class="rotulo">Serviços e preços</span>
+    <h2>Preço na tela, <em>sem surpresa</em> no caixa.</h2>
+    <div class="precos">
+      <div><h3>Sobrancelhas</h3>
+        <div class="item"><div><b>Design de sobrancelha</b><span>Mapeamento, pinça e acabamento</span></div><em>R$ 35</em></div>
+        <div class="item"><div><b>Design + henna</b><span>Dura até 15 dias na pele</span></div><em>R$ 50</em></div>
+        <div class="item"><div><b>Brow lamination</b><span>Volume por até 6 semanas</span></div><em>R$ 120</em></div>
+        <div class="item"><div><b>Micropigmentação fio a fio</b><span>Inclui retoque em 30 dias</span></div><em>R$ 450</em></div>
+        <div class="item"><div><b>Buço</b><span>Cera ou linha</span></div><em>R$ 15</em></div>
+      </div>
+      <div><h3>Maquiagem</h3>
+        <div class="item"><div><b>Maquiagem social</b><span>Pele, olhos e boca pra eventos</span></div><em>R$ 150</em></div>
+        <div class="item"><div><b>Maquiagem de noiva</b><span>Com teste antes do dia</span></div><em>a partir de R$ 450</em></div>
+        <div class="item"><div><b>Maquiagem + design</b><span>Na mesma sessão</span></div><em>R$ 175</em></div>
+        <div class="item"><div><b>Aula de automaquiagem</b><span>2 horas, com seus produtos</span></div><em>R$ 220</em></div>
+      </div>
+    </div>
+    <p class="nota">Pagamento via Pix, cartão ou dinheiro, sem taxa extra.</p>
+  </section>
+
+  <section class="sec" id="equipe">
+    <span class="rotulo">Quem atende</span>
+    <h2>Duas profissionais, <em>um cuidado só</em>.</h2>
+    <div class="equipe">
+      <div class="pessoa"><i>J</i><div><b>Juliana</b><span>Fundadora · sobrancelhas</span><p>Especialista em design, henna e micropigmentação.</p></div></div>
+      <div class="pessoa"><i>C</i><div><b>Camila</b><span>Maquiadora</span><p>Maquiagem social e de noiva, com pele leve e duradoura.</p></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="avaliacoes">
+    <span class="rotulo">Avaliações no Google</span>
+    <h2>Quem já sentou <em>na nossa cadeira</em>.</h2>
+    <div class="avals">
+      <div class="aval"><div class="est">★★★★★</div><p>“Primeira vez que saio com a sobrancelha do meu jeito. Ela desenhou antes e me mostrou tudo.”</p><span>Cliente (exemplo)</span></div>
+      <div class="aval"><div class="est">★★★★★</div><p>“Agendo pelo WhatsApp e sou atendida no horário. Ambiente limpinho e tranquilo.”</p><span>Cliente (exemplo)</span></div>
+      <div class="aval"><div class="est">★★★★★</div><p>“Fiz a maquiagem pro casamento da minha irmã e durou a festa inteira.”</p><span>Cliente (exemplo)</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="rotulo">Trabalhos</span>
+    <div class="galeria">
+      <img src="midia/mapeamento.jpg" alt="Mapeamento de sobrancelha" loading="lazy">
+      <img src="midia/maquiagem.jpg" alt="Maquiagem social" loading="lazy">
+      <img src="midia/henna.jpg" alt="Design com henna" loading="lazy">
+      <img src="midia/bancada.jpg" alt="Material descartável na bancada" loading="lazy">
+      <img src="midia/capa.jpg" alt="Design de sobrancelha" loading="lazy">
+      <img src="midia/ambiente.jpg" alt="Ambiente do studio" loading="lazy">
+    </div>
+  </section>
+
+
+  <section class="sec" id="duvidas">
+    <span class="rotulo">Perguntas frequentes</span>
+    <h2>Antes de <em>marcar</em>.</h2>
+    <div class="faq">
+      <details><summary>Precisa agendar?</summary><p>Sim, o atendimento é com hora marcada, pelo WhatsApp. Quando sobra horário no dia, a gente encaixa.</p></details>
+      <details><summary>Quanto tempo leva o design?</summary><p>Uns 40 minutos. Com henna, perto de 1 hora.</p></details>
+      <details><summary>Quanto tempo dura a henna?</summary><p>Até 15 dias na pele e por volta de 30 dias nos fios, dependendo da sua pele e dos cuidados em casa.</p></details>
+      <details><summary>Brow lamination dói?</summary><p>Não. É um alinhamento dos fios com produto, sem agulha. Dura de 4 a 6 semanas.</p></details>
+      <details><summary>Posso remarcar?</summary><p>Pode, avisando com 24 horas de antecedência pelo WhatsApp.</p></details>
+      <details><summary>Faz maquiagem de noiva fora do studio?</summary><p>Sim, sob consulta. O valor do deslocamento é combinado antes.</p></details>
+      <details><summary>Quais formas de pagamento?</summary><p>Pix, cartão de débito e crédito ou dinheiro, sem taxa extra.</p></details>
+    </div>
+  </section>
+
+  <section class="sec" id="visita">
+    <span class="rotulo">Visite</span>
+    <h2>Rua Exemplo, 123 · <em>Manaíra</em>.</h2>
+    <div class="visita">
+      <div>
+        <table class="horario">
+          <tr><td>Terça a sexta</td><td>9h às 19h</td></tr>
+          <tr><td>Sábado</td><td>8h às 17h</td></tr>
+          <tr><td>Domingo e segunda</td><td>Fechado</td></tr>
+        </table>
+        <div class="chips" style="margin-top:22px"><span>Material descartável</span><span>Climatizado</span><span>Wi-Fi grátis</span><span>Aceita Pix e cartão</span></div>
+        <div class="acoes"><a class="btn btn-a" href="https://inksites.github.io/salao/">Agendar no WhatsApp</a></div>
+      </div>
+      <iframe class="mapa" title="Mapa de Manaíra, João Pessoa" loading="lazy" src="https://maps.google.com/maps?q=Mana%C3%ADra%2C%20Jo%C3%A3o%20Pessoa%20-%20PB&z=14&output=embed"></iframe>
+    </div>
+  </section>
+
+  <section class="sec fim">
+    <h2>Sua próxima sobrancelha <em>já tem horário</em>.</h2>
+    <p>Chama no WhatsApp e escolhe o dia. A gente confirma na hora.</p>
+    <a class="btn btn-a" href="https://inksites.github.io/salao/">Agendar no WhatsApp</a>
+  </section>
+  <footer>Studio Lírio · João Pessoa/PB · modelo de demonstração feito pela InkSites</footer>
+</main>
+<a class="zapfixo" href="https://inksites.github.io/salao/" aria-label="Agendar no WhatsApp"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8a11.6 11.6 0 0 1-4.5-4c-.4-.6-1-1.7-1-2.9s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg></a>
+
+<script>
+// Temas: preto & branco (padrão) ou rosé. Guarda a escolha na URL (?tema=rose) pra dar pra mandar o link certo.
+(function () {
+  var html = document.documentElement, botoes = document.querySelectorAll('.temas button');
+  function aplicar(t) {
+    html.setAttribute('data-tema', t);
+    botoes.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === t); });
+    var u = new URL(location.href); u.searchParams.set('tema', t); history.replaceState(null, '', u);
+  }
+  var inicial = new URLSearchParams(location.search).get('tema');
+  if (inicial === 'rose' || inicial === 'noir') aplicar(inicial);
+  botoes.forEach(function (b) { b.addEventListener('click', function () { aplicar(b.dataset.t); }); });
+})();
+
+// Rolagem em filme: o progresso da seção (0 a 1) escolhe a cena, faz o vídeo avançar e dá zoom lento nas fotos.
+(function () {
+  var filme = document.getElementById('filme'), video = document.getElementById('v');
+  var camadas = [].slice.call(filme.querySelectorAll('.camada')), cenas = [].slice.call(filme.querySelectorAll('.cena'));
+  var marcas = [].slice.call(filme.querySelectorAll('.trilha div'));
+  var n = camadas.length, atual = 0, quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var forcado = location.search.match(/p=([\d.]+)/); // teste: ?p=0.5 mostra o filme naquele ponto
+  if (/resto/.test(location.search)) filme.style.display = 'none'; // teste: ?resto mostra só o que vem depois do filme
+
+  function progresso() {
+    if (forcado) return parseFloat(forcado[1]);
+    var r = filme.getBoundingClientRect(), total = filme.offsetHeight - innerHeight;
+    return Math.min(1, Math.max(0, -r.top / total));
+  }
+  function suave(x) { return x < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x); }
+
+  function desenhar(p) {
+    var pos = p * n, idx = Math.min(n - 1, Math.floor(pos)), dentro = pos - idx;
+    camadas.forEach(function (c, i) {
+      var entra = i === 0 ? 1 : suave((pos - (i - 0.15)) / 0.15);
+      var sai = i === n - 1 ? 1 : 1 - suave((pos - (i + 0.85)) / 0.15);
+      c.style.opacity = Math.min(entra, sai);
+      if (i > 0 && !quieto) { var t = Math.min(1, Math.max(0, pos - i + 0.15)); c.style.transform = 'scale(' + (1.08 - 0.08 * t) + ')'; }
+    });
+    cenas.forEach(function (c, i) {
+      var d = pos - i, op;
+      if (i === 0) op = 1 - suave((d - 0.62) / 0.2);
+      else if (i === n - 1) op = suave(d / 0.12);
+      else op = Math.min(suave(d / 0.12), 1 - suave((d - 0.62) / 0.2));
+      c.style.opacity = op;
+      c.style.transform = 'translateY(' + (1 - op) * 22 + 'px)';
+      c.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
+    });
+    marcas.forEach(function (m, i) { m.classList.toggle('ativo', i === idx); });
+    if (video.duration && idx === 0) {
+      var tt = Math.min(0.999, dentro) * video.duration;
+      if (Math.abs(video.currentTime - tt) > 0.02) { try { video.currentTime = tt; } catch (e) {} }
+    }
+  }
+  function quadro() {
+    var alvo = progresso();
+    atual += (alvo - atual) * (quieto || forcado || window.__gravando ? 1 : 0.16); // __gravando: gravação do Reels, sem suavização
+    if (Math.abs(alvo - atual) < 0.0005) atual = alvo;
+    desenhar(atual);
+    requestAnimationFrame(quadro);
+  }
+  video.addEventListener('loadedmetadata', function () { desenhar(atual); });
+  window.__quadro = function () { atual = progresso(); desenhar(atual); }; // gravação do Reels: desenha na hora, sem esperar o requestAnimationFrame
+  requestAnimationFrame(quadro);
+})();
+</script>
+</body>
+</html>
